@@ -24,7 +24,7 @@ export const Header = () => {
               </div>
               <InputBase
                 placeholder='Search...'
-                className={{
+                classes={{
                   root: classes.inputRoot,
                   input: classes.inputInput,
                 }}
