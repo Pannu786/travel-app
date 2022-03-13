@@ -10,8 +10,9 @@ import { getPlacesData } from './api';
 function App() {
   const [places, setPlaces] = useState([]);
   const [coordinates, setCoordinates] = useState({});
-  const [bounds, setBounds] = useState(null);
+  const [bounds, setBounds] = useState({});
 
+  // this effect will run once when the component is mounted and will run again when the coordinates change. It is using build in browser API to get the current location and updating the setCoordinates state.
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       ({ coords: { latitude, longitude } }) => {
@@ -22,8 +23,9 @@ function App() {
 
   useEffect(() => {
     console.log(coordinates, bounds);
-    getPlacesData().then((data) => {
-      console.log(data);
+
+    getPlacesData(bounds.sw, bounds.ne, ).then((data) => {
+      console.log(data)
       setPlaces(data);
     });
   }, [coordinates, bounds]);
