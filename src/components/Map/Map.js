@@ -5,9 +5,9 @@ import Rating from '@material-ui/lab';
 
 import useStyles from './styles';
 
-export const Map = ({ coordinates, setCoordinates, setBounds }) => {
+export const Map = ({ coordinates, setCoordinates, setBounds, places }) => {
   const classes = useStyles();
-  const isMoblie = useMediaQuery('(max-width:600px)');
+  const isDesktop = useMediaQuery('(max-width:600px)');
 
   return (
     <div className={classes.mapContainer}>
@@ -24,7 +24,35 @@ export const Map = ({ coordinates, setCoordinates, setBounds }) => {
           console.log(e);
         }}
         onChildClick={''}
-      ></GoogleMapReact>
+      >
+        {places?.map((place, i) => (
+          <div
+            className={classes.markerContainer}
+            lat={+place.latitude}
+            lng={+place.longitude}
+            key={i}
+          >
+            { isDesktop ? (
+              <LocationOnOutlinedIcon color='primary' fontSize='large' />
+            ) : (
+              <Paper elevation={3} className={classes.paper}>
+                <Typography
+                  className={classes.typography}
+                  variant='subtitle2'
+                  gutterBottom
+                >
+                  {place.name}
+                  </Typography>
+                  <img
+                    className={classes.pointer}
+                    src={place.photo
+                    ? place.photo.images.large.url
+                    : 'https://www.foodserviceandhospitality.com/wp-content/uploads/2016/09/Restaurant-Placeholder-001.jpg'} alt={place.name}/>
+              </Paper>
+            )}
+          </div>
+        ))}
+      </GoogleMapReact>
     </div>
   );
 };
