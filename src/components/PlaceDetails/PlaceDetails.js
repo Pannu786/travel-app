@@ -46,6 +46,7 @@ export const PlaceDetails = ({ place }) => {
         </Box>
         {place?.awards?.map((award) => (
           <Box
+            key={award.awards}
             my={1}
             display='flex'
             justifyContent='space-between'
