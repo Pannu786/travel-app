@@ -1,7 +1,6 @@
 import axios from 'axios';
 
-const URL =
-  'https://travel-advisor.p.rapidapi.com/restaurants/list-in-boundary';
+
 
 // url = some url
 // axios
@@ -13,23 +12,27 @@ const URL =
 //     console.error(error);
 //   });
 
-export const getPlacesData = async (sw, ne) => {
+export const getPlacesData = async (type, sw, ne) => {
   try {
     const {
       data: { data },
-    } = await axios.get(URL, {
-      params: {
-        bl_latitude: sw.lat,
-        tr_latitude: ne.lat,
-        bl_longitude: sw.lng,
-        tr_longitude: ne.lng,
-        currency: 'NZD',
-      },
-      headers: {
-        'x-rapidapi-host': 'travel-advisor.p.rapidapi.com',
-        'x-rapidapi-key': 'a139d307c0msh7d39d4c8b8908f5p1dc382jsn57221454568f',
-      },
-    });
+    } = await axios.get(
+      `https://travel-advisor.p.rapidapi.com/${type}/list-in-boundary`,
+      {
+        params: {
+          bl_latitude: sw.lat,
+          tr_latitude: ne.lat,
+          bl_longitude: sw.lng,
+          tr_longitude: ne.lng,
+          currency: 'NZD',
+        },
+        headers: {
+          'x-rapidapi-host': 'travel-advisor.p.rapidapi.com',
+          'x-rapidapi-key':
+            'a139d307c0msh7d39d4c8b8908f5p1dc382jsn57221454568f',
+        },
+      }
+    );
 
     return data;
   } catch (error) {

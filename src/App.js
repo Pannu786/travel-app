@@ -15,6 +15,8 @@ function App() {
   const [bounds, setBounds] = useState({});
 
   const [isLoading, setIsLoading] = useState(false);
+  const [type, setType] = useState('restaurants');
+  const [rating, setRating] = useState('');
 
   // this effect will run once when the component is mounted and will run again when the coordinates change. It is using build in browser API to get the current location and updating the setCoordinates state.
   useEffect(() => {
@@ -26,13 +28,18 @@ function App() {
   }, []);
 
   useEffect(() => {
+
+  },
+  [rating])
+
+  useEffect(() => {
     setIsLoading(true);
 
-    getPlacesData(bounds.sw, bounds.ne).then((data) => {
+    getPlacesData(type, bounds.sw, bounds.ne).then((data) => {
       setPlaces(data);
       setIsLoading(false);
     });
-  }, [coordinates, bounds]);
+  }, [type, coordinates, bounds]);
 
   return (
     <>
@@ -44,6 +51,10 @@ function App() {
             places={places}
             childClicked={childClicked}
             isLoading={isLoading}
+            type={type}
+            setType={setType}
+            rating={rating}
+            setRating={setRating}
           />
         </Grid>
         <Grid item xs={12} md={8}>
