@@ -1,7 +1,5 @@
 import axios from 'axios';
 
-
-
 // url = some url
 // axios
 //   .request(url, options)
@@ -34,6 +32,28 @@ export const getPlacesData = async (type, sw, ne) => {
       }
     );
 
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getWeatherData = async (lat, lng) => {
+  try {
+    const { data } = await axios.get(
+      'https://community-open-weather-map.p.rapidapi.com/weather',
+      {
+        params: {
+          lat: lat,
+          lon: lng,
+        },
+        headers: {
+          'x-rapidapi-host': 'community-open-weather-map.p.rapidapi.com',
+          'x-rapidapi-key':
+            'a139d307c0msh7d39d4c8b8908f5p1dc382jsn57221454568f',
+        },
+      }
+    );
     return data;
   } catch (error) {
     console.log(error);

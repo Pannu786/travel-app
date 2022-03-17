@@ -11,6 +11,7 @@ export const Map = ({
   setBounds,
   places,
   setChildClicked,
+  weatherData,
 }) => {
   const classes = useStyles();
   const isDesktop = useMediaQuery('(max-width:600px)');
@@ -61,6 +62,11 @@ export const Map = ({
                 <Rating size='small' value={+place.rating} readyOnly />
               </Paper>
             )}
+          </div>
+        ))}
+        {weatherData?.list?.map((data, i) => (
+          <div key={i} lat={data.coord.lat} lng={data.coord.log}>
+            <img heigth={150} src={`https://openweathermap.org/img/w/${data.weather[0].icon}.png`}/>
           </div>
         ))}
       </GoogleMapReact>
