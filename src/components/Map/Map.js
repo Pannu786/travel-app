@@ -4,7 +4,6 @@ import LocationOnOutlinedIcon from '@material-ui/icons/LocationOnOutlined';
 import Rating from '@material-ui/lab/Rating';
 
 import useStyles from './styles';
-import { useState } from 'react';
 
 export const Map = ({
   coordinates,
